@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>todolist</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/animations.css">
+	<link rel="stylesheet" href="css/test.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jacques+Francois+Shadow">	
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div class="container" id='ShowTime' style='text-align: center; padding:20px;'></div>
+	<div class="container" style='box-shadow:0 5px 10px rgb(0 0 0 / 20%)'>
+		<h1 class="expandOpen" style="padding:20px;text-align: center; font-family:Brush Script MT, Brush Script Std, cursive;";>
+		To Do List
+		</h1>
+		<div class="input-group" style='padding:0 20px 0 20px;'>
+			<button onclick="myFunction()" type="button" class="btn btn-secondary">新增項目</button>
+			<input id='myInput' onkeydown="keyIn()" type='text' class='form-control' style='margin:0 0 0 20px;' placeholder="請輸入待辦事項">
+		</div>
+		<ul class='list' id="myUL" style='padding:20px;'>
+		</ul>
+	</div>
+</body>
+
+<script>
+	function myFunction()
+	{
+		var input = document.getElementById("myInput").value; //取資料
+		var li = document.createElement("li");//取屬性 把資料變成列表
+		var myList = document.createTextNode(input);//從網頁取資料
+		li.appendChild(myList);
+//		document.body.appendChild(li);
+		
+		if (input === '') {
+			alert("請輸入代辦資料，再新增");
+		} else {
+			document.getElementById("myUL").appendChild(li);
+		}
+
+		document.getElementById("myInput").value = "";  //清為空值
+		//創造關閉按鈕
+		var span = document.createElement("SPAN");
+		var txt = document.createTextNode("\u00D7");
+		span.className = "close";
+		span.appendChild(txt);
+		li.appendChild(span);
+		//把資料刪除
+		for (i = 0; i < close.length; i++) {
+			close[i].onclick = function() {
+				var div = this.parentElement;
+				div.style.display = "none";
+			}
+		}
+	}
+	//輸入完資料也可用enter
+	function keyIn(){
+		if (event.keyCode==13){//enter的鍵值為13
+			var input = document.getElementById("myInput").value; //取資料
+			var li = document.createElement("li");//取屬性 把資料變成列表
+			var myList = document.createTextNode(input);//從網頁取資料
+			li.appendChild(myList);
+			
+			if (input === '') {
+				alert("請輸入待辦資料，再新增");
+			} else {
+				document.getElementById("myUL").appendChild(li);
+			}
+
+			document.getElementById("myInput").value = "";  //清為空值
+			//創造關閉按鈕
+			var span = document.createElement("SPAN");
+			var txt = document.createTextNode("\u00D7");
+			span.className = "close";
+			span.appendChild(txt);
+			li.appendChild(span);
+			//把資料刪除
+			for (i = 0; i < close.length; i++) {
+				close[i].onclick = function() {
+					var div = this.parentElement;
+					div.style.display = "none";
+				}
+			}
+			
+		}
+	}
+		
+		//在原本的清單列表 創造關閉按鈕 
+		var myNodelist = document.getElementsByTagName("LI");
+		var i;
+		for (i = 0; i < myNodelist.length; i++) {
+			var span = document.createElement("SPAN");
+			var txt = document.createTextNode("\u00D7");
+			span.className = "close";
+			span.appendChild(txt);
+			myNodelist[i].appendChild(span);
+		}
+		
+	//把資料刪除
+	var close = document.getElementsByClassName("close");
+	var i;
+	for (i = 0; i < close.length; i++) {
+		close[i].onclick = function() {
+			var div = this.parentElement;
+			div.style.display = "none";
+		}
+	}
+
+	//新增ck的屬性到list，https://ithelp.ithome.com.tw/articles/10203574
+	var list = document.querySelector('ul');
+	list.addEventListener('click', function(ev) {
+		if (ev.target.tagName === 'LI') {
+			ev.target.classList.toggle('checked');
+		}
+	}, false);
+
+	// 取得時間
+	const currentDateTime = moment().format('YYYY/MM/DD');
+	console.log(currentDateTime);
+	document.getElementById("ShowTime").innerHTML=currentDateTime;
+
+</script>
+
+</html>
+
